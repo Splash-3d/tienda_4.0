@@ -384,25 +384,15 @@ if (!fs.existsSync('uploads')) {
     fs.mkdirSync('uploads');
 }
 
-// Health check endpoint
+// Health check endpoint simple para Railway
 app.get('/health', (req, res) => {
-    res.status(200).json({ 
-        status: 'OK', 
-        timestamp: new Date().toISOString(),
-        port: PORT,
-        environment: NODE_ENV
-    });
+    res.status(200).send('OK');
 });
 
 // Iniciar servidor
 const server = app.listen(PORT, '0.0.0.0', () => {
-    console.log(`✅ Servidor iniciado exitosamente`);
-    console.log(`🌐 Puerto: ${PORT}`);
-    console.log(`🌍 Environment: ${NODE_ENV}`);
-    console.log(`🔗 Health check: http://0.0.0.0:${PORT}/health`);
-    console.log(`👤 Panel admin: https://tu-app.railway.app/admin`);
-    console.log(`📧 Usuario: admin@tienda.com`);
-    console.log(`🔑 Contraseña: admin123`);
+    console.log(`Servidor iniciado en puerto ${PORT}`);
+    console.log(`Health check OK en /health`);
 });
 
 // Manejo de errores del servidor

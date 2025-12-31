@@ -13,6 +13,13 @@ const PORT = process.env.PORT || 5000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const JWT_SECRET = process.env.JWT_SECRET || 'tu_secreto_super_secreto';
 
+// Inicializar base de datos
+db.serialize(() => {
+    console.log('🗄️ Inicializando base de datos...');
+    // La base de datos se inicializa automáticamente
+    console.log('✅ Base de datos lista');
+});
+
 // Middleware
 app.use(helmet({
   contentSecurityPolicy: NODE_ENV === 'production' ? undefined : false,
@@ -388,9 +395,37 @@ app.get('/health', (req, res) => {
 });
 
 // Iniciar servidor
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Servidor corriendo en puerto ${PORT}`);
-    console.log(`Panel admin: https://tu-app.railway.app/admin`);
-    console.log(`Usuario: admin@tienda.com`);
-    console.log(`Contraseña: admin123`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`✅ Servidor iniciado exitosamente`);
+    console.log(`🌐 Puerto: ${PORT}`);
+    console.log(`🌍 Environment: ${NODE_ENV}`);
+    console.log(`🔗 Health check: http://0.0.0.0:${PORT}/health`);
+    console.log(`👤 Panel admin: https://tu-app.railway.app/admin`);
+    console.log(`📧 Usuario: admin@tienda.com`);
+    console.log(`🔑 Contraseña: admin123`);
+});
+
+// Manejo de errores del servidor
+server.on('error', (error) => {
+    console.error('❌ Error al iniciar servidor:', error);
+    if (error.code === 'EADDRINUSE') {
+        console.error(`❌ Puerto ${PORT} ya está en uso`);
+    }
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+    console.log('🔄 Recibido SIGTERM, cerrando servidor...');
+    server.close(() => {
+        console.log('✅ Servidor cerrado');
+        process.exit(0);
+    });
+});
+
+process.on('SIGINT', () => {
+    console.log('🔄 Recibido SIGINT, cerrando servidor...');
+    server.close(() => {
+        console.log('✅ Servidor cerrado');
+        process.exit(0);
+    });
 });

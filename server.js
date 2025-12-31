@@ -377,8 +377,18 @@ if (!fs.existsSync('uploads')) {
     fs.mkdirSync('uploads');
 }
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ 
+        status: 'OK', 
+        timestamp: new Date().toISOString(),
+        port: PORT,
+        environment: NODE_ENV
+    });
+});
+
 // Iniciar servidor
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Servidor corriendo en puerto ${PORT}`);
     console.log(`Panel admin: https://tu-app.railway.app/admin`);
     console.log(`Usuario: admin@tienda.com`);

@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+client/node_modules/
+
+# build
+client/build/
+dist/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env
+.env
+.env.*
+
+# database
+*.sqlite
+*.db
+
+# OS
+.DS_Store
+Thumbs.db

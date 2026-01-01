@@ -65,7 +65,6 @@ const ProductsPage: React.FC = () => {
       precio: product.precio,
       imagen: product.imagen
     });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     console.log('Product added to cart:', product.nombre);
   };
 

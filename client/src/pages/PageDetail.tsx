@@ -60,19 +60,23 @@ const PageDetail: React.FC = () => {
   return (
     <div className="page-detail">
       <div className="container">
-        {/* Breadcrumb */}
-        <nav className="breadcrumb">
-          <Link to="/">Inicio</Link>
-          <span className="separator">/</span>
-          <span className="current">{page.titulo}</span>
-        </nav>
+        {/* Breadcrumb and Title - Hide for sobre-nosotros */}
+        {page.slug !== "sobre-nosotros" && (
+          <>
+            <nav className="breadcrumb">
+              <Link to="/">Inicio</Link>
+              <span className="separator">/</span>
+              <span className="current">{page.titulo}</span>
+            </nav>
+
+            <h1 className="page-title">{page.titulo}</h1>
+          </>
+        )}
 
         {/* Page Content */}
         <div className="page-content">
-          <h1 className="page-title">{page.titulo}</h1>
-          
-          <div 
-            className="page-body"
+          <div
+            style={{ all: "unset" }}
             dangerouslySetInnerHTML={{ __html: page.contenido }}
           />
         </div>

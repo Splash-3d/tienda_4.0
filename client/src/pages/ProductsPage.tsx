@@ -117,7 +117,11 @@ const ProductsPage: React.FC = () => {
                     <div className="product-image">
                       {product.imagen ? (
                         <>
-                          <img src={`/uploads/${product.imagen}`} alt={product.nombre} />
+                          <img
+                            src={`/uploads/${product.imagen}`}
+                            alt={product.nombre}
+                            loading="lazy"
+                          />
                           <div className="product-overlay">
                             <span className="quick-view">Vista rápida</span>
                           </div>

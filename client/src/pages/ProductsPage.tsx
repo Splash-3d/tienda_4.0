@@ -116,16 +116,11 @@ const ProductsPage: React.FC = () => {
                   <Link to={`/producto/${product.id}`} className="product-link">
                     <div className="product-image">
                       {product.imagen ? (
-                        <>
-                          <img
-                            src={`/uploads/${product.imagen}`}
-                            alt={product.nombre}
-                            loading="lazy"
-                          />
-                          <div className="product-overlay">
-                            <span className="quick-view">Vista rápida</span>
-                          </div>
-                        </>
+                        <img
+                          src={`/uploads/${product.imagen}`}
+                          alt={product.nombre}
+                          loading="lazy"
+                        />
                       ) : (
                         <div className="product-placeholder">
                           <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">

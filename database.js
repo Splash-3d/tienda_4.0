@@ -82,6 +82,24 @@ function initializeDatabase() {
         }
     });
 
+    // Crear segundo usuario admin si no existe
+    const adminEmail2 = 'gunnarcuchu@gmail.com';
+    const adminPassword2 = 'SESAMO123';
+    
+    db.get('SELECT id FROM usuarios WHERE email = ?', [adminEmail2], (err, row) => {
+        if (!row) {
+            const hashedPassword2 = bcrypt.hashSync(adminPassword2, 10);
+            db.run('INSERT INTO usuarios (email, password) VALUES (?, ?)', 
+                [adminEmail2, hashedPassword2], 
+                function(err) {
+                    if (!err) {
+                        console.log('Usuario admin creado: gunnarcuchu@gmail.com / SESAMO123');
+                    }
+                }
+            );
+        }
+    });
+
     // Insertar categorías de ejemplo si no existen
     const categoriasEjemplo = [
         { nombre: 'Electrónica', slug: 'electronica' },

@@ -65,8 +65,8 @@ function initializeDatabase() {
     )`);
 
     // Crear usuario admin por defecto si no existe
-    const adminEmail = 'admin@tienda.com';
-    const adminPassword = 'admin123';
+    const adminEmail = 'lighting2385@gmail.com';
+    const adminPassword = 'Pitimirri2385';
     
     db.get('SELECT id FROM usuarios WHERE email = ?', [adminEmail], (err, row) => {
         if (!row) {
@@ -75,7 +75,7 @@ function initializeDatabase() {
                 [adminEmail, hashedPassword], 
                 function(err) {
                     if (!err) {
-                        console.log('Usuario admin creado: admin@tienda.com / admin123');
+                        console.log('Usuario admin creado: lighting2385@gmail.com / Pitimirri2385');
                     }
                 }
             );
